@@ -46,6 +46,7 @@
      unpack_group
      wrap
      lookup
+     list_all
 
      call_result_key
      index_result_key
@@ -110,6 +111,18 @@
                                      [(group t) #'t]
                                      [g #'g])))
   (and si (static-info-lookup si key)))
+
+(define-for-syntax (list_all form)
+  (define who 'statinfo_meta.list_all)
+  (unless (syntax? form) (raise-argument-error* who rhombus-realm "Syntax" form))
+  (extract-static-infos (syntax-parse (unpack-group form who #f)
+                          #:datum-literals (parsed group)
+                          [(group (parsed #:rhombus/expr e)) #'e]
+                          [(group . (~var name (:hier-name-seq in-name-root-space (lambda (x) x) name-path-op name-root-ref/maybe)))
+                           (and (null? (syntax-e #'name.tail))
+                                #'name.name)]
+                          [(group t) #'t]
+                          [g #'g])))
 
 (define-for-syntax call_result_key #'#%call-result)
 (define-for-syntax index_result_key #'#%index-result)

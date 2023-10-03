@@ -125,7 +125,7 @@
                           si)))]
       [(quote d) (quoted-static-infos #'d)]
       [_ null]))
-  
+
   (define (quoted-static-infos d)
     (cond
       [(string? (syntax-e d)) string-static-infos]
