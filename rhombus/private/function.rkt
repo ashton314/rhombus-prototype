@@ -99,6 +99,7 @@
                                                   (hash-set ht kw #t))
                                                 #`(#t (accepts-keywords? v '#,(sort (map syntax-e kws) keyword<?)))]))]
                         [(n ...) (generate-temporaries #'(g ...))])
+            (println "here 1")
             (values (annotation-predicate-form
                      #`(let ([n (check-nonneg-integer 'Function.of_arity (rhombus-expression g))]
                              ...)
@@ -107,7 +108,8 @@
                                 (procedure-arity-includes? v n kw-ok?)
                                 ...
                                 kw-check)))
-                     function-static-infos)
+                     #`((#%dot-provider function-instance)
+                        (#%function-arity 42)))
                     #'tail)))]))))
 
 (define (check-nonneg-integer who v)
@@ -140,7 +142,7 @@
 (define-syntax function-instance
   (dot-provider function-instance-proc))
 
-(begin-for-syntax  
+(begin-for-syntax
   (define (get-local-name who)
     (or (syntax-local-name) who)))
 
@@ -253,7 +255,7 @@
    ;; extract arity:
    (lambda (stx)
      1)))
-  
+
 (define-for-syntax (parse-anonymous-function stx [adjustments no-adjustments] [for-entry? #f])
   (syntax-parse stx
     #:datum-literals (group block alts)
@@ -307,4 +309,3 @@
 
 (begin-for-syntax
   (set-function-dot-provider! function-instance-proc))
-

@@ -27,7 +27,7 @@
   (struct update-transformer (proc))
   (define (update-transformer-ref v)
     (and (update-transformer? v) v))
-  
+
   (define-syntax-class :update-provider
     (pattern (~var ref-id (:static-info #'#%dot-provider))
              #:attr id #'ref-id.val)))

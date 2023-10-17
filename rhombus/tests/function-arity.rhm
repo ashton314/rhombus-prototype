@@ -170,3 +170,8 @@ static check:
       super(z+1, z-1)
   fun (): Posn(1, 2)
   ~raises "wrong number of arguments in function call"
+
+static check:
+  fun some_fun(f :: Function.of_arity(1)):
+    f(1, 2)
+  ~raises "wrong number of arguments in function call"

@@ -34,4 +34,3 @@ expr.macro 'send $target ... . $(method :: Identifier)($(kw :: Keyword): $kw_arg
 
 expr.macro '$obj is_a $class':
   expr_meta.pack_s_exp(['rkt_is_a', obj, class])
-  

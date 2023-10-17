@@ -72,7 +72,7 @@
              (property-out annotation-infix-operator)
 
              identifier-annotation
-             
+
              in-annotation-space
              annot-quote
 
@@ -93,7 +93,7 @@
 
              build-annotated-expression
              raise-unchecked-disallowed))
-  
+
   (provide define-annotation-syntax
            define-annotation-constructor
 
@@ -222,7 +222,7 @@
     #`(#:pred #,predicate #,static-infos))
   (define (annotation-binding-form binding body static-infos)
     #`(#:bind #,binding #,body #,static-infos))
-  
+
   (define (identifier-annotation predicate-stx static-infos)
     (define packed (annotation-predicate-form predicate-stx static-infos))
     (annotation-prefix-operator
@@ -233,7 +233,7 @@
        (values packed (syntax-parse stx
                         [(_ . tail) #'tail]
                         [_ 'does-not-happen])))))
-  
+
   (define (parse-annotation-of stx predicate-stx static-infos
                                sub-n kws
                                ;; predicate-maker can be #f if only a converter is supported
@@ -442,7 +442,7 @@
         #:with left::binding-form form
         (values
          (syntax-parse #'t.parsed
-           [c-parsed::annotation-predicate-form 
+           [c-parsed::annotation-predicate-form
             (binding-form
              #'annotation-predicate-infoer
              #`(#,(shrubbery-syntax->string (remove-tail #'t #'t.tail))

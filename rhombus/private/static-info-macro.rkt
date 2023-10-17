@@ -49,6 +49,7 @@
      list_all
 
      call_result_key
+     function_arity_key
      index_result_key
      index_get_key
      index_set_key
@@ -125,6 +126,7 @@
                           [g #'g])))
 
 (define-for-syntax call_result_key #'#%call-result)
+(define-for-syntax function_arity_key #'#%function-arity)
 (define-for-syntax index_result_key #'#%index-result)
 (define-for-syntax index_get_key #'#%index-get)
 (define-for-syntax index_set_key #'#%index-set)

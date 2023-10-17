@@ -105,7 +105,7 @@
      (check-transformer-result (parse-annotation-macro-result form proc)
                                (unpack-tail new-tail proc #f)
                                proc))))
-  
+
 (define-for-syntax (annotation-kind stx who)
   (syntax-parse (unpack-term stx who #f)
     #:datum-literals (parsed)
@@ -153,7 +153,7 @@
                                rhombus-realm
                                "not a parsed-binding syntax object"
                                "value"  binding)]))
-     
+
 
 (define-for-syntax (unpack_converter stx)
   (syntax-parse (unpack-term stx 'annot_meta.unpack_predicate #f)
