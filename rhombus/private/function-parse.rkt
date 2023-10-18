@@ -3,6 +3,7 @@
                      (only-in racket/function normalize-arity)
                      racket/syntax
                      syntax/parse/pre
+                     racket/pretty
                      enforest/name-parse
                      shrubbery/property
                      shrubbery/print
@@ -972,6 +973,7 @@
               (if rator-arity
                   (values rator-arity #f)
                   (rator-static-info/indirect #'#%function-arity #:result values)))
+            (pretty-print `(here2 ,a ,indirect?))
             (when a
               (let* ([a (if (syntax? a) (syntax->datum a) a)])
                 (check-arity rator-stx rator-in a (+ (length extra-rands) (if indirect? 1 0)) kws rsts kwrsts rator-kind)))))

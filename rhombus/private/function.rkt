@@ -99,7 +99,13 @@
                                                   (hash-set ht kw #t))
                                                 #`(#t (accepts-keywords? v '#,(sort (map syntax-e kws) keyword<?)))]))]
                         [(n ...) (generate-temporaries #'(g ...))])
-            (println "here 1")
+            (printf "here 1;\n   gs: ~a\n   ns: ~a\n  kws: ~a\n" (syntax->list #'(g ...)) (syntax->list #'(n ...)) (syntax->list #'(kw ...)))
+            ;; This is the only place I can find where I have the arity given as
+            ;; an integer (as opposed to a list of symbols.) I think I will need
+            ;; to manually do the work to & the right bits together. The
+            ;; `extract-arity` function from define-arity.rkt might be a helpful
+            ;; example to look at, as might `summarize-arity` from another
+            ;; module that's currently not imported.
             (values (annotation-predicate-form
                      #`(let ([n (check-nonneg-integer 'Function.of_arity (rhombus-expression g))]
                              ...)
@@ -109,7 +115,7 @@
                                 ...
                                 kw-check)))
                      #`((#%dot-provider function-instance)
-                        (#%function-arity 42)))
+                        (#%function-arity 5)))
                     #'tail)))]))))
 
 (define (check-nonneg-integer who v)

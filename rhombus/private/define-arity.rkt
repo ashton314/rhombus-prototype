@@ -9,7 +9,7 @@
          "dot-provider-key.rkt")
 
 (provide define/arity
-         (for-syntax set-function-dot-provider!))
+         (for-syntax extract-arity set-function-dot-provider!))
 
 (module+ dot-provider
   (provide function-dot-provider))

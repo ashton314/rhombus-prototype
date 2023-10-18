@@ -1,0 +1,29 @@
+#lang rhombus/and_meta
+
+defn.macro 'static $check: $form; ...; $raises $msg':
+  '$check:
+     ~eval
+     use_static
+     $form; ...
+     $raises values($msg, "static")
+   $check:
+     ~eval
+     $form; ...
+     $(Syntax.make(#'~completes, raises))'
+
+// fun whatever(x, y):
+//   x + y
+
+// whatever(1, 2)
+
+println("doing checks")
+
+use_static
+fun some_fun(f :: Function.of_arity(1, 3, 7, ~foo, ~bar)):
+  f(1, 2)
+
+// static check:
+//   fun some_fun(f :: Function.of_arity(3)):
+//     f(1, 2)
+//     f(1)
+//   ~raises "wrong number of arguments in function call"
